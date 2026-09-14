@@ -15,6 +15,37 @@ const create = createRoot( root );
 // // 2. 가져온 컴포넌트 렌더링하기 - render : 그리기 함수
 // create.render( <App> </App>)
 
-//[day01]
-import MyMarkup from "./example/day01/MyMarkup";
-create.render(<MyMarkup> </MyMarkup>)
+
+
+// /==========================================================/
+// [※] 렌더는 한 번만 가능하므로 이전에 실습한 것은 주석처리 할 것.
+// /==========================================================/
+
+
+// [day01]
+// import MyMarkup from "./example/day01/MyMarkup";
+// create.render(<MyMarkup> </MyMarkup>)
+
+// import Component1 from "./example/day01/Component1";
+// create.render(<Component1> </Component1>)
+
+// import Component2 from "./example/day01/Component2";
+// create.render(<Component2/>)
+
+// import Component3 from "./example/day01/Component3";
+// create.render(<Component3 />)
+
+// import Component4 from "./example/day01/Component4";
+// create.render(<Component4 />)
+
+// import Component5 from "./example/day01/Component5";
+// create.render(<Component5 />)
+
+// import Component6 from "./example/day01/Component6";
+// create.render(<Component6 />)
+
+// /==========================================================/
+// [day02]
+
+import Practice1 from "./example/day02/Practice1";
+create.render(<Practice1 />)
