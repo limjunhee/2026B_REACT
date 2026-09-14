@@ -47,5 +47,14 @@ const create = createRoot( root );
 // /==========================================================/
 // [day02]
 
-import Practice1 from "./example/day02/Practice1";
-create.render(<Practice1 />)
+// import Practice1 from "./example/day02/Practice1";
+// create.render(<Practice1 />)
+
+// import Component1 from "./example/day02/Component1";
+// create.render(<Component1 />)
+
+// import Component2 from "./example/day02/Component2";
+// create.render(<Component2 />)
+
+import Component3 from "./example/day02/Component3";
+create.render(<Component3 />)
