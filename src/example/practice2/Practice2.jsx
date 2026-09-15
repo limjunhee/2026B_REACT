@@ -20,9 +20,9 @@ export default function Practice2(props){
         setMembers([...members]); // 렌더링을 위해 setter와 스프레드연산자를 응용해 배열 복사해온다. -> 이거 안하면 새로고침 안됨
     }
     return(<>
-        <input value={ name } onChange={(e) => {setName(e.target.value)}}/> 
+        <input value={ name } onChange={(e) => { setName(e.target.value) }}/> 
         <input value={ age } onChange={(e) => { setAge(e.target.value) }}/>
-        <input value={phone} onChange={(e) => { setPhone(e.target.value) }} />     {/* 입력 구간 */}
+        <input value={phone} onChange={(e) => { setPhone(e.target.value) }}/>     {/* 입력 구간 */}
         <button onClick={등록함수}> 등록 </button>
         <br />
         {
