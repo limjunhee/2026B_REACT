@@ -1,0 +1,1 @@
+import jquertLogo from './assets/jquery.png'

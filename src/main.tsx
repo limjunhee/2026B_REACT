@@ -60,5 +60,13 @@ const create = createRoot( root );
 // create.render(<Component3 />)
 
 // // [totalpractice1]
-import ProductManager from "./example/totalpractice1/ProductManager";
-create.render(<ProductManager />)
+// import ProductManager from "./example/totalpractice1/ProductManager";
+// create.render(<ProductManager />)
+
+// /==========================================================/
+// [day03]
+// import Component3 from "./example/day03/Component3";
+// create.render(<Component3 />)
+
+import Practice2 from "./example/practice2/Practice2";
+create.render(<Practice2 />)

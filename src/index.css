@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -108,4 +108,20 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+} */
+
+
+css.backend{
+  color: blue;
+}
+
+#backEndSub {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.warnings {
+  color: white;
+  background-color: red;
+  font-size: 1.2em;
 }
