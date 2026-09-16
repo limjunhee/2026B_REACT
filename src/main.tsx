@@ -68,5 +68,14 @@ const create = createRoot( root );
 // import Component3 from "./example/day03/Component3";
 // create.render(<Component3 />)
 
-import Practice2 from "./example/practice2/Practice2";
-create.render(<Practice2 />)
+// import Practice2 from "./example/practice2/Practice2";
+// create.render(<Practice2 />)
+
+// /==========================================================/
+// [day04]
+
+import { BrowserRouter } from "react-router-dom"; // 1. 라우터 라이브러리 가져옴
+import App from "./example/day04/App";
+// 최초 렌더링 되는 컴포넌트 앞뒤로 라우터 컴포넌트 감싼다.
+// <BrowserRouter> <최상위컴포넌트/></></BrowserRouter>
+create.render(<BrowserRouter> <App /> </BrowserRouter>)
