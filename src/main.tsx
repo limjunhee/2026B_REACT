@@ -81,10 +81,10 @@ const create = createRoot( root );
 // // <BrowserRouter> <최상위컴포넌트/></></BrowserRouter>
 // create.render(<BrowserRouter> <App /> </BrowserRouter>)
 
-// import App from "./example/practice3/App"
-// create.render(<BrowserRouter><App/></BrowserRouter>)
+import App from "./example/practice3/App"
+create.render(<BrowserRouter><App/></BrowserRouter>)
 
 // /==========================================================/
 // [day05]
-import App from "./example/day05/App"
-create.render(<BrowserRouter><App /></BrowserRouter>)
+// import App from "./example/day05/App"
+// create.render(<BrowserRouter><App /></BrowserRouter>)

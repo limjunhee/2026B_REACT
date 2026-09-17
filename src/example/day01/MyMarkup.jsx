@@ -1,6 +1,6 @@
 // function 컴포넌트명(props){ return }
 
-// JSX란? HTML과 우사한 확장 문법
+// JSX란? HTML과 유사한 확장 문법
 
 // 주의점 : 리액트가 만든 가상의 HTML(DOM)
 
