@@ -23,6 +23,7 @@ export default function Practice1(props) {
     return (<>
         {/* <Profile name={data[0].name} imageUrl={data[0].imageUrl}></Profile>
         <Profile name={data[1].name} imageUrl={data[1].imageUrl}></Profile> */}
+        
         {
             data.map( i => { return (<>
                 <Profile key = {i} name = {i.name} imageUrl = {i.imageUrl}></Profile>
