@@ -1,13 +1,32 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function LimJunHee (props) {
-    // 입력값 받을 상태 변수
-    let [name, setName] = useState('');
-    let [price, setPrice] = useState('');
-    let [cno, setCno] = useState('');
 
-    // API 응답 결과 저장하는 상태 변수
+    const [myJSON, setMyJSON] = useState({ products: [] });
+
+    useEffect(function () {
+        const getProductList = async function () {
+            const products = await axios.get(
+                /*"http://localhost:8080/testJunHee"*/ "/api/testJunHee"
+            );
+            const data = products.data.response.body.items;
+            setMyJSON({ products: data });
+        };
+        getProductList();
+
+    }, []);
+
+    let trTag = myJSON.products.map((data) => {
+        return (
+            <tr key={data.smkng_zone_nm}>
+                <td>{data.se}</td>
+                <td>{data.lctn_road_nm_addr}</td>
+                <td>{data.mgc}</td>
+                <td>{data.lctn_lonto_addr}</td>
+            </tr>
+        )
+    });
 
     // 제품 등록 함수
     async function addProduct (e) {
@@ -42,6 +61,22 @@ export default function LimJunHee (props) {
                     <input type = 'text' name = "cno" placeholder="카테고리 번호(cno) (예:1)" />
                     <button type='submit'> 제품 등록 </button>
                 </form>
+            </div>
+            <div>
+                <h2>안양 흡연구역</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>장소이름</th>
+                            <th>동안구/만안구</th>
+                            <th>주소</th>
+                            <th>상세주소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {trTag}
+                    </tbody>
+                </table>
             </div>
         </div>
     </>)

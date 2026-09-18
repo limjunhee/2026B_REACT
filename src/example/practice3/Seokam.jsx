@@ -1,13 +1,26 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function Seokam(props){
+export default function Seokam(props) {
 
     async function create(e) {
         e.preventDefault();
         let value = e.target.category.value;
-        await axios.post('https://wellness-exclusion-surfing-advisory.trycloudflare.com/api/categories', { name: value })
+        await axios.post('https://discussions-louis-bradley-blue.trycloudflare.com/api/categories', { name: value })
     }
 
+    const [food, setFood] = useState([]);
+
+    async function getFoodData() {
+        const response = await axios.get(/*"http://localhost:8080/test4"*/ "/api/test4");
+        let data = response.data.getFoodKr.item
+        console.log(data)
+        setFood(data);
+    }
+
+    useEffect(() => {
+        getFoodData();
+    }, []);
     return (<>
         <>
             <div>
@@ -24,6 +37,10 @@ export default function Seokam(props){
                     <input type='text' name='category' placeholder='새 카테고리 명' />
                     <button type='submit'> 등록 </button>
                 </form>
+                <ul>
+                    {food.map((food, i) =>
+                        <li key={i}>{food.MAIN_TITLE} {food.GUGUN_NM} <li>{food.ITEMCNTNTS}</li></li>)}
+                </ul>
             </div>
         </>
     </>)

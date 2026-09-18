@@ -8,9 +8,9 @@ export default function Jin() {
     useEffect(function () {
         const getProductList = async function () {
             const products = await axios.get(
-                "https://wellness-exclusion-surfing-advisory.trycloudflare.com/api/products"
+                /*"http://localhost:8080/testJin"*/ "/api/testJin"
             );
-            const data = products.data;
+            const data = products.data.data;
             setMyJSON({ products: data });
         };
         getProductList();
@@ -19,11 +19,11 @@ export default function Jin() {
 
     let trTag = myJSON.products.map((data) => {
         return (
-            <tr key={data.bno}>
-                <td>{data.bno}</td>
-                <td>{data.categoryname}</td>
-                <td>{data.name}</td>
-                <td>{data.price}</td>
+            <tr key={data.분류코드}>
+                <td>{data.정렬번호}</td>
+                <td>{data.분류코드}</td>
+                <td>{data.분류명}</td>
+                <td>{data.분류영문명}</td>
             </tr>
         )
     });
@@ -49,10 +49,10 @@ export default function Jin() {
                         <table border="1">
                             <thead>
                                 <tr>
-                                    <th>bno</th>
-                                    <th>카테고리</th>
-                                    <th>상품명</th>
-                                    <th>가격</th>
+                                    <th>정렬번호</th>
+                                    <th>분류코드</th>
+                                    <th>분류명</th>
+                                    <th>분류영문명</th>
                                 </tr>
                             </thead>
 
