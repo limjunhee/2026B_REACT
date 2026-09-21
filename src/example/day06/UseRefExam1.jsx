@@ -5,6 +5,7 @@ export default function UseRefExam1 (props) {
     const refNum = useRef(0)                     // 2. Ref 변수 생성
     let myNum = 0;                               // 3. 일반 변수 생성
 
+    // 렌더링 : 함수 재호출
     const plusState = () => { // 상태 변수를 1 증가시키는 함수를 정의함
         setStateNum( stateNum + 1 );
         console.log('State 증가!', stateNum);
@@ -33,5 +34,5 @@ export default function UseRefExam1 (props) {
 }
 
 // 상태변수 증가 버튼 클릭 : 콘솔에 증가하는 게 보임, 화면에도 증가하는 게 보임.(리렌더링 O)
-// Ref 변수 증가 버튼 클릭 : 콘솔에 증가하는 게 보임, 화면에서는 증가 안하다가 상태변수가 증가하면 그제서야 변함 (리렌더링 X)
-// 일반변수 증가 버튼 클릭 : 콘솔에만 증가하는 게 보임, state 증가하면 0으로 초기화됨 (리렌더랑 X, 초기화 성질 때문에 임시 사용용도)
+// Ref 변수 증가 버튼 클릭 : 콘솔에 증가하는 게 보임, 화면에서는 증가 안하다가 상태변수가 증가하면 그제서야 변함 (리렌더링 X, 리렌더링 되도 초기화 X)
+// 일반변수 증가 버튼 클릭 : 콘솔에만 증가하는 게 보임, 리렌더링 발생하면 0으로 초기화됨 (초기화 성질 때문에 임시 사용용도)
