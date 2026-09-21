@@ -76,15 +76,21 @@ const create = createRoot( root );
 // /==========================================================/
 // [day04]
 
-// import App from "./example/day04/App";
+
 // // 최초 렌더링 되는 컴포넌트 앞뒤로 라우터 컴포넌트 감싼다.
 // // <BrowserRouter> <최상위컴포넌트/></></BrowserRouter>
+// import App from "./example/day04/App";
 // create.render(<BrowserRouter> <App /> </BrowserRouter>)
 
-import App from "./example/practice3/App"
-create.render(<BrowserRouter><App/></BrowserRouter>)
+// import App from "./example/practice3/App"
+// create.render(<BrowserRouter><App/></BrowserRouter>)
 
 // /==========================================================/
 // [day05]
 // import App from "./example/day05/App"
 // create.render(<BrowserRouter><App /></BrowserRouter>)
+
+// /==========================================================/
+// [day06]
+import App from "./example/day06/App"
+create.render(<BrowserRouter><App/></BrowserRouter>)
