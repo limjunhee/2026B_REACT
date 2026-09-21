@@ -92,5 +92,9 @@ const create = createRoot( root );
 
 // /==========================================================/
 // [day06]
-import App from "./example/day06/App"
+// import App from "./example/day06/App"
+// create.render(<BrowserRouter><App/></BrowserRouter>)
+
+import "./index.css"
+import App from "./example/종합예제1/App"
 create.render(<BrowserRouter><App/></BrowserRouter>)

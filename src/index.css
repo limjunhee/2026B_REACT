@@ -110,8 +110,9 @@ code {
   background: var(--code-bg);
 } */
 
+/* ============================================================================= */
 
-css.backend{
+/* css.backend{
   color: blue;
 }
 
@@ -124,4 +125,45 @@ css.backend{
   color: white;
   background-color: red;
   font-size: 1.2em;
+} */
+
+/* ====================================[종합예제1]========================================= */
+
+* { margin: 5px; }
+input,
+textarea {
+  width: 95%;
 }
+
+input[type=submit] {
+  width: 100px;
+}
+
+#boardTable {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  width: 500px;
+}
+
+#boardTable tr {
+  text-align: center;
+}
+
+#boardTable th,
+td {
+  border: 1px solid gray;
+}
+
+#boardTable td {
+  text-align: left;
+}
+
+#boardTable td.cen {
+  text-align: center;
+}
+
+#boardTable td.subject {
+  text-align: center;
+}
+
+/* ====================================[종합예제1]========================================= */
