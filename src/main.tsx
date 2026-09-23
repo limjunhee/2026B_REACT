@@ -82,8 +82,8 @@ const create = createRoot( root );
 // import App from "./example/day04/App";
 // create.render(<BrowserRouter> <App /> </BrowserRouter>)
 
-import App from "./example/practice3/App"
-create.render(<BrowserRouter><App/></BrowserRouter>)
+// import App from "./example/practice3/App"
+// create.render(<BrowserRouter><App/></BrowserRouter>)
 
 // /==========================================================/
 // [day05]
@@ -102,5 +102,5 @@ create.render(<BrowserRouter><App/></BrowserRouter>)
 // /==========================================================/
 // [day07]
 
-// import App from "./example/day07/App"
-// create.render(<BrowserRouter><App /></BrowserRouter>)
+import App from "./example/day07/App"
+create.render(<BrowserRouter><App /></BrowserRouter>)
