@@ -82,8 +82,8 @@ const create = createRoot( root );
 // import App from "./example/day04/App";
 // create.render(<BrowserRouter> <App /> </BrowserRouter>)
 
-// import App from "./example/practice3/App"
-// create.render(<BrowserRouter><App/></BrowserRouter>)
+import App from "./example/practice3/App"
+create.render(<BrowserRouter><App/></BrowserRouter>)
 
 // /==========================================================/
 // [day05]
@@ -91,7 +91,7 @@ const create = createRoot( root );
 // create.render(<BrowserRouter><App /></BrowserRouter>)
 
 // /==========================================================/
-// [day06]
+// // [day06]
 // import App from "./example/day06/App"
 // create.render(<BrowserRouter><App/></BrowserRouter>)
 
@@ -102,5 +102,5 @@ const create = createRoot( root );
 // /==========================================================/
 // [day07]
 
-import App from "./example/day07/App"
-create.render(<BrowserRouter><App /></BrowserRouter>)
+// import App from "./example/day07/App"
+// create.render(<BrowserRouter><App /></BrowserRouter>)
