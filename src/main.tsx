@@ -101,6 +101,6 @@ const create = createRoot( root );
 
 // /==========================================================/
 // [day07]
-import "./index.css"
+
 import App from "./example/day07/App"
 create.render(<BrowserRouter><App /></BrowserRouter>)
