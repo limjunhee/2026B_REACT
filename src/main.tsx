@@ -104,3 +104,8 @@ const create = createRoot( root );
 
 import App from "./example/day07/App"
 create.render(<BrowserRouter><App /></BrowserRouter>)
+
+// /==========================================================/
+// [day10] - springboot의 day10 실습파일과 연계됨
+import App from "./example/day10/App";
+create.render(<BrowserRouter><App/></BrowserRouter>)
