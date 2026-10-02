@@ -13,7 +13,7 @@ function Login({ setCurrentUser }) {
       const res = await axios.post(
         'http://localhost:8080/api/member/login',
         { mid, mpwd },
-        { withCredentials: true }
+        { withCredentials: true } // await axios.post(url, body, { withCredentials: true }); --->  { withCredentials: true } == 도메인 다른 경우 쿠키/세션 유지하는 용도
       );
 
       // 컨트롤러가 성공 시 MemberDto 객체, 실패 시 null을 직접 리턴함
