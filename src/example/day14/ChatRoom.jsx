@@ -67,17 +67,38 @@ export default function ChatRoom(props){
 
     console.log( messages )
 
-    return(
-        <>
-            <h3> 채팅방 </h3>
+    const [isConnected, setIsConnected] = useState(false); // 방 접속 여부
+    const [roomId, setRoomId] = useState(''); // 입력받은 방
+    const [sender, setSender] = useState(''); // 접속자(닉네임)
+    
+    // 접속 함수
+    const connect = () => { }
 
-            {   messages.map((msg) => {
-                    console.log( msg );
-                    return <div> {msg.sender} : {msg.content}</div>
-                })
-            }
-            <input value={ message } onChange={(e) => setMessage(e.target.value)}/>
-            <button type="button" onClick={sendMessage}>전송</button>
-        </>
+    return (
+        <div>
+            {!isConnected ? (
+                <div>
+                    <input value={roomId} placeholder="방제목/번호 입력"
+                        onChange={(e) => { setRoomId(e.target.value) }} />
+                    <input value={sender} placeholder="채팅 닉네임 입력"
+                        onChange={(e) => { setSender(e.target.value) }} />
+                    <button type="button" onClick={connect}> 접속 </button>
+                </div>
+            ) : (
+                <div>
+                    <div>
+                        {messages.map((msg) => {
+                            <div>
+                                <div> {msg.sender} : {msg.content} </div>
+                            </div>
+                        })}
+                    </div>
+                    <div>
+                        <input value={message} onChange={(e) => setMessage(e.target.value)} />
+                        <button type="button" onClick={sendMessage}> 전송 </button>
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }
