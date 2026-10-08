@@ -16,38 +16,38 @@ export default function ChatRoom(props){
     // const 변수명 = useRef(초기값); , useRef는 값을 [변수명.current] 속성에 보관
     const clientRef = useRef(null); 
 
+    // // 접속 함수 따로 만들었으니 주석처리
+    // // 딱 한번만 실행
+    // useEffect( () => {
+    //     // Client -> Stomp에서 제공하는 라이브러리
+    //     // 2. const client = new Client( {brokerURL : "접속할백엔드브로커주소", onConnect : 접속성공이벤트/함수})
+    //     const client = new Client( { 
+    //         brokerURL: "ws://localhost:8080/ws-chat", // 스프링의 'registerStompEndpoints' 정의한 소켓 주소와 일치
+    //         // 3. 만약 stomp 접속 성공했다면 특정 경로를 구독
+    //         onConnect : () => { // 접속 성공시 실행되는 이벤트(함수)
+    //             // 특정 경로 구독 신청
+    //             // client.subscribe("/구독경로", (message) => { 메시지 받았을 때 할 것 })
+    //             client.subscribe("/sub/chat/room/general", (message) => {
+    //                 // 4. 만약에 특정 경로의 구독에서 메시지를 받았을 때
+    //                 // JSON.parse( 문자열을 JS객체로 변환 ) vs JSON.stringify( JS객체를 문자열로 변환 )
+    //                 // AXIOS 통신은 JSON 기본값으로 자동 변환 지원!
+    //                 messages.push( JSON.parse( message.body ) );
+    //                 setMessages( [...messages] ); // 렌더링
+    //             }) // 스프링의 'configureMessageBroker' 정의 주소와 일치
+    //         }
+    //     } )// client end
 
-    // 딱 한번만 실행
-    useEffect( () => {
-        // Client -> Storm에서 제공하는 라이브러리
-        // 2. const client = new Client( {brokerURL : "접속할백엔드브로커주소", onConnect : 접속성공이벤트/함수})
-        const client = new Client( { 
-            brokerURL: "ws://localhost:8080/ws-chat", // 스프링의 'registerStompEndpoints' 정의한 소켓 주소와 일치
-            // 3. 만약 storm 접속 성공했다면 특정 경로를 구독
-            onConnect : () => { // 접속 성공시 실행되는 이벤트(함수)
-                // 특정 경로 구독 신청
-                // client.subscribe("/구독경로", (message) => { 메시지 받았을 때 할 것 })
-                client.subscribe("/sub/chat/room/general", (message) => {
-                    // 4. 만약에 특정 경로의 구독에서 메시지를 받았을 때
-                    // JSON.parse( 문자열을 JS객체로 변환 ) vs JSON.stringify( JS객체를 문자열로 변환 )
-                    // AXIOS 통신은 JSON 기본값으로 자동 변환 지원!
-                    messages.push( JSON.parse( message.body ) );
-                    setMessages( [...messages] ); // 렌더링
-                }) // 스프링의 'configureMessageBroker' 정의 주소와 일치
-            }
-        } )// client end
+    //     // 5. stomp 실행
+    //     client.activate()
 
-        // 5. stomp 실행
-        client.activate()
+    //     // 6. client 객체 다른 함수(전송함수) 사용하기 위해 밖으로(전역변수로)
+    //     // useRef : 상태 값을 저장하고 변경 시 렌더링을 막음.
+    //     // 클라이언트 객체를 다른 함수에서 사용하기 위함
+    //     clientRef.current = client;
 
-        // 6. client 객체 다른 함수(전송함수) 사용하기 위해 밖으로(전역변수로)
-        // useRef : 상태 값을 저장하고 변경 시 렌더링을 막음.
-        // 클라이언트 객체를 다른 함수에서 사용하기 위함
-        clientRef.current = client;
-
-        // 7. 만약 컴포넌트가 사라졌다면? stomp 종료
-        return () => { client.deactivate() ;}
-    }, []) 
+    //     // 7. 만약 컴포넌트가 사라졌다면? stomp 종료
+    //     return () => { client.deactivate() ;}
+    // }, []) 
 
 
     // 전송 시 백엔드에게 메시지 보내기
@@ -59,7 +59,7 @@ export default function ChatRoom(props){
         // 9. 메시지 전송, client.publish( { destination: "/발행주소", body : 내용물 } )
         // 발행주소: 스프링의 configureMessageBroker에서 정의된 발행주소 + @MessageMapping 으로 지정된 주소
         const info = { // 스프링의 MessageDto 참조하여 구성
-            type : 'TALK', roomId: "general", sender: "user", content: message, date: new Date().toISOString()
+            type : 'TALK', roomId, sender, content: message, date: new Date().toLocaleTimeString()
         }
         clientRef.current.publish( { destination: "/pub/chat/message" ,
             body : JSON.stringify(info) // JS객체 -> 문자열 반환
@@ -72,10 +72,48 @@ export default function ChatRoom(props){
     const [roomId, setRoomId] = useState(''); // 입력받은 방
     const [sender, setSender] = useState(''); // 접속자(닉네임)
 
-    // 접속 함수
-    const connect = ()=>{ }
+    // 접속 함수 --> 스프링 브로커 연결
+    const connect = ()=>{ 
+        const client = new Client({
+            brokerURL: "ws://localhost:8080/ws-chat",
+            onConnect: () => {
+                setIsConnected(true); // 1. ******** 접속 상태 변경
+                // 2. ************* 입력받은 방 제목으로 구독함
+                client.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+                    messages.push(JSON.parse(message.body));
+                    setMessages([...messages]); // 렌더링
+                })
+                // 3. ********** 입장메시지 발행 ************
+                client.publish({
+                    destination : "/pub/chat/message",
+                    body: JSON.stringify( {type:'ENTER',
+                        roomId, sender, content: '', date: new Date().toLocaleTimeString()
+                    } )
+                })
+            }
+        })// client end
+
+        client.activate()
+
+        clientRef.current = client;
+    } // connect end
+
+
     // 퇴장 함수
-    const disconnect = ()=>{ }
+    const disconnect = () => {
+        // 1. 퇴장 메시지 발행 
+        clientRef.current.publish({
+            destination: "/pub/char/message",
+            body: JSON.stringify({
+                type: 'QUIT', roomId, sender,
+                content: '', date: new Date().toLocaleTimeString()
+            })
+        })
+        // 2. 소켓 닫기 
+        clientRef.current.deactivate();
+        setIsConnected(false); setMessage([]); // 상태변수 초기화
+    } // disconnect end
+
 
     return (
         <div>
@@ -127,7 +165,7 @@ export default function ChatRoom(props){
         </div>
     )
 
-    
+
     // return (
     //     <div>
     //         {!isConnected ? (
